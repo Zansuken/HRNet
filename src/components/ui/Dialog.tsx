@@ -10,6 +10,17 @@ type Props = {
   children: React.ReactNode;
 };
 
+/**
+ * A reusable dialog component.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {boolean} props.closeOnOverlayClick - Determines whether the dialog should close when the overlay is clicked.
+ * @param {boolean} props.open - Determines whether the dialog is open or closed.
+ * @param {Function} props.onClose - The callback function to be called when the dialog is closed.
+ * @param {ReactNode} props.children - The content to be rendered inside the dialog.
+ * @returns {JSX.Element|null} The rendered dialog component.
+ */
 const Dialog: FC<Props> = ({
   closeOnOverlayClick,
   open,
@@ -18,9 +29,7 @@ const Dialog: FC<Props> = ({
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
-  useClickOutside(dialogRef, () => {
-    if (closeOnOverlayClick) onClose();
-  });
+  useClickOutside(dialogRef, () => closeOnOverlayClick && open && onClose());
 
   if (!open) return null;
 
