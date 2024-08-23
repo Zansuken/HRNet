@@ -4,22 +4,33 @@ import classNames from "classnames";
 import useClickOutside from "../../hooks/useClickOutside";
 
 type Props = {
+  /**
+   * Determines whether the dialog should close when the overlay is clicked.
+   */
   closeOnOverlayClick?: boolean;
+  /**
+   * Determines whether the dialog is open or closed.
+   */
   open: boolean;
+  /**
+   * The callback function to be called when the dialog is closed.
+   */
   onClose: () => void;
   children: React.ReactNode;
 };
 
 /**
  * A reusable dialog component.
- *
- * @component
- * @param {Object} props - The component props.
- * @param {boolean} props.closeOnOverlayClick - Determines whether the dialog should close when the overlay is clicked.
- * @param {boolean} props.open - Determines whether the dialog is open or closed.
- * @param {Function} props.onClose - The callback function to be called when the dialog is closed.
- * @param {ReactNode} props.children - The content to be rendered inside the dialog.
- * @returns {JSX.Element|null} The rendered dialog component.
+ * @example
+ * <Dialog
+ *  open={isDialogOpen}
+ *  onClose={() => setIsDialogOpen(false)}
+ * >
+ *  <div className="p-4">
+ *    <h2 className="text-xl font-semibold">Dialog Title</h2>
+ *    <p className="text-sm">Dialog content goes here.</p>
+ *  </div>
+ * </Dialog>
  */
 const Dialog: FC<Props> = ({
   closeOnOverlayClick,

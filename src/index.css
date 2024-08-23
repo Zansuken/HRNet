@@ -48,7 +48,7 @@
 
 body,
 #root {
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   box-sizing: border-box;
   display: flex;
@@ -61,4 +61,18 @@ body,
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* custom scrollbar */
+
+* ::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F4F4F5;
+  border-radius: 6px;
+}
+
+* ::-webkit-scrollbar-thumb {
+  background-color: #1F2937;
+  border-radius: 6px;
+  border: 3px solid #F4F4F5
 }

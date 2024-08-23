@@ -17,7 +17,7 @@ const Button: FC<Props> = ({ buttonProps, type, onClick, children }) => {
         {
           "hover:bg-gray-700": !buttonProps?.disabled,
           "cursor-not-allowed": buttonProps?.disabled,
-          "bg-gray-500": buttonProps?.disabled,
+          "bg-gray-400": buttonProps?.disabled,
         }
       )}
       onClick={onClick}

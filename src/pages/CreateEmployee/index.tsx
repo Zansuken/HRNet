@@ -8,7 +8,7 @@ import Header from "../../components/Header";
 import ConfirmationDialog from "./ConfirmationDialog";
 import { FormProps } from "./types";
 import { useAppDispatch } from "../../redux/hooks";
-import { addEmployee } from "../../redux/appSlice";
+import { addEmployee } from "../../redux/app/appSlice";
 import { useNavigate } from "react-router-dom";
 
 const CreateEmployee: FC = () => {
@@ -219,7 +219,7 @@ const CreateEmployee: FC = () => {
                 }),
               }}
               error={formState.errors["state"]?.message}
-              emptyOption
+              emptyOption="Select a state"
             />
             <Input
               id="zip-code"
@@ -253,7 +253,7 @@ const CreateEmployee: FC = () => {
               }),
             }}
             error={formState.errors["department"]?.message}
-            emptyOption
+            emptyOption="Select a department"
           />
           <Button
             type="submit"

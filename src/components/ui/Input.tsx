@@ -1,12 +1,12 @@
-import { FC } from "react";
+import { FC, InputHTMLAttributes } from "react";
 import classNames from "classnames";
 
 type Props = {
   error?: string;
   id: string;
-  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  inputProps?: InputHTMLAttributes<HTMLInputElement>;
   label: string;
-  type: string;
+  type: InputHTMLAttributes<HTMLInputElement>["type"];
 };
 
 const Input: FC<Props> = ({ error, id, inputProps, label, type }) => (
