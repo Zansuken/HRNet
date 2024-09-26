@@ -85,9 +85,10 @@ const Select: FC<Props> = ({
     <select
       id={id}
       className={classNames(
-        "w-full px-3 py-2 border rounded-md appearance-none pr-8 pl-4 bg-no-repeat bg-[url('./assets/icons/arrows-up-down.svg')] bg-[length:32px_32px] bg-[right_0_center]",
+        "w-full hover:cursor-pointer px-3 py-2 rounded-md appearance-none pr-8 pl-4 bg-no-repeat bg-[url('./assets/icons/arrows-up-down.svg')] bg-[length:32px_32px] bg-[right_0_center]",
         {
-          "border-red-500": Boolean(error),
+          "border-red-500 focus-within:border-red-500 focus-within:outline-red-500 hover:outline-red-500 outline-transparent":
+            Boolean(error),
         }
       )}
       onChange={onChange}

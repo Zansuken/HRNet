@@ -5,13 +5,14 @@ import TableHead from "./TableHead";
 import TableBody from "./TableBody";
 import { Employee } from "../../../types/employee";
 import Loader from "../../Loader";
+import Search from "./Search";
 
 export type TableColumnType = {
   label: string;
   key: keyof Employee;
 };
 
-type TableRowValue = {
+export type TableRowValue = {
   value: string;
   hide?: boolean;
 };
@@ -24,17 +25,33 @@ type Props = {
   columns: TableColumnType[];
   rows: TableRowType[];
   enablePagination?: boolean;
+  enableSearch?: boolean;
   isLoading?: boolean;
+  title?: string;
 };
 
-const Table: FC<Props> = ({ columns, rows, enablePagination, isLoading }) => {
+const Table: FC<Props> = ({
+  columns,
+  rows,
+  enablePagination,
+  enableSearch,
+  isLoading,
+  title,
+}) => {
   return (
     <TableProvider
       columns={columns}
       rows={rows}
       enablePagination={enablePagination}
+      enableSearch={enableSearch}
       isLoading={isLoading}
     >
+      {(enableSearch || title) && (
+        <div className="flex items-center justify-between mb-6">
+          {title && <h1 className="text-3xl font-bold">{title}</h1>}
+          {enableSearch && <Search />}
+        </div>
+      )}
       <div className="flex-1 flex flex-col h-full overflow-y-auto">
         {isLoading ? (
           <div className="flex-1 flex justify-center items-center">

@@ -62,12 +62,13 @@ const Employees: FC = () => {
     <>
       <Header />
       <main className="container flex flex-col mx-auto my-8 h-[calc(100vh-92px)]">
-        <h1 className="text-3xl font-bold mb-6">Current Employees</h1>
         <Table
           columns={columns}
           rows={rows}
           enablePagination
+          enableSearch
           isLoading={isFetchingEmployees}
+          title="Current Employees"
         />
       </main>
     </>

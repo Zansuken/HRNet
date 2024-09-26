@@ -1,4 +1,4 @@
-import { FC, Fragment } from "react";
+import { FC, Fragment, memo } from "react";
 import { TableRowType } from "./Table";
 import TableCell from "./TableCell";
 
@@ -8,7 +8,7 @@ type Props = {
   children?: React.ReactNode;
 };
 
-const TableRow: FC<Props> = ({ row = [], isHeader, children }) => {
+const TableRow: FC<Props> = memo(({ row = [], isHeader, children }) => {
   if (isHeader) {
     return <tr className="bg-muted text-muted-foreground">{children}</tr>;
   }
@@ -22,6 +22,6 @@ const TableRow: FC<Props> = ({ row = [], isHeader, children }) => {
       ))}
     </tr>
   );
-};
+});
 
 export default TableRow;
