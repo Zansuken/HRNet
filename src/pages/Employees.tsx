@@ -3,11 +3,12 @@ import Header from "../components/Header";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { appSelectors } from "../redux/app/appSelectors";
 import getEmployees from "../redux/app/getEmployees";
-import Table, {
+import { Employee } from "../types/employee";
+import { Table } from "doom-ui";
+import {
   TableColumnType,
   TableRowType,
-} from "../components/ui/Table/Table";
-import { Employee } from "../types/employee";
+} from "doom-ui/src/components/Table/Table";
 
 const Employees: FC = () => {
   const isFetchingEmployees = useAppSelector(appSelectors.selectLoading);

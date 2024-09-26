@@ -1,7 +1,5 @@
 import { FC, useState } from "react";
-import Input from "../../components/ui/Input";
-import Select from "../../components/ui/Select";
-import Button from "../../components/ui/Button";
+import { Button, DatePicker, Input, Select } from "doom-ui";
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
 import Header from "../../components/Header";
@@ -100,10 +98,9 @@ const CreateEmployee: FC = () => {
             }}
             error={formState.errors["lastName"]?.message}
           />
-          <Input
+          <DatePicker
             id="dob"
             label="Date of Birth"
-            type="date"
             inputProps={{
               ...register("dob", {
                 required: { value: true, message: "Date of Birth is required" },
@@ -111,10 +108,9 @@ const CreateEmployee: FC = () => {
             }}
             error={formState.errors["dob"]?.message}
           />
-          <Input
+          <DatePicker
             id="start-date"
             label="Start Date"
-            type="date"
             inputProps={{
               ...register("startDate", {
                 required: { value: true, message: "Start Date is required" },

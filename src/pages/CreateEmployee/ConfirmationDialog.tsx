@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Dialog from "../../components/ui/Dialog";
+import { Dialog } from "doom-ui";
 
 type Props = {
   open: boolean;
