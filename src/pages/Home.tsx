@@ -1,6 +1,6 @@
+import { Button } from "doom-ui";
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "doom-ui";
 
 const Home: FC = () => {
   const navigate = useNavigate();
@@ -10,9 +10,7 @@ const Home: FC = () => {
       <h1 className="text-3xl font-bold">HRnet</h1>
       <div className="flex w-full">
         <div className="w-1/2 flex justify-end pr-2">
-          <Button type="button" onClick={() => navigate("/employees")}>
-            See Employees
-          </Button>
+          <Button onClick={() => navigate("/employees")}>See Employees</Button>
         </div>
         <div className="w-1/2 flex justify-start pl-2">
           <Button type="button" onClick={() => navigate("/create-employee")}>

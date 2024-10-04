@@ -4,11 +4,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { appSelectors } from "../redux/app/appSelectors";
 import getEmployees from "../redux/app/getEmployees";
 import { Employee } from "../types/employee";
-import { Table } from "doom-ui";
-import {
-  TableColumnType,
-  TableRowType,
-} from "doom-ui/src/components/Table/Table";
+import { Table, TableRowType } from "doom-ui";
 
 const Employees: FC = () => {
   const isFetchingEmployees = useAppSelector(appSelectors.selectLoading);
@@ -16,7 +12,7 @@ const Employees: FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const columns: TableColumnType[] = [
+  const columns = [
     { label: "First Name", key: "firstName" },
     { label: "Last Name", key: "lastName" },
     { label: "Date of Birth", key: "dob" },
@@ -53,7 +49,7 @@ const Employees: FC = () => {
     return newEmployee;
   });
 
-  const rows: TableRowType[] = formattedEmployees.map((employee) => employee);
+  const rows = formattedEmployees.map((employee) => employee);
 
   useEffect(() => {
     dispatch(getEmployees());

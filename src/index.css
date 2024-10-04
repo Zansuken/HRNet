@@ -46,6 +46,10 @@
   }
 }
 
+html {
+  height: 100vh;
+}
+
 body,
 #root {
   height: 100%;
@@ -63,16 +67,21 @@ body,
   box-sizing: border-box;
 }
 
+input,
+select {
+  line-height: normal;
+}
+
 /* custom scrollbar */
 
 * ::-webkit-scrollbar {
   width: 12px;
-  background-color: #F4F4F5;
+  background-color: #f4f4f5;
   border-radius: 6px;
 }
 
 * ::-webkit-scrollbar-thumb {
-  background-color: #1F2937;
+  background-color: #1f2937;
   border-radius: 6px;
-  border: 3px solid #F4F4F5
+  border: 3px solid #f4f4f5;
 }

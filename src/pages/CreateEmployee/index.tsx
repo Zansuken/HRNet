@@ -1,5 +1,4 @@
 import { FC, useState } from "react";
-import { Button, DatePicker, Input, Select } from "doom-ui";
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
 import Header from "../../components/Header";
@@ -8,6 +7,7 @@ import { FormProps } from "./types";
 import { useAppDispatch } from "../../redux/hooks";
 import { addEmployee } from "../../redux/app/appSlice";
 import { useNavigate } from "react-router-dom";
+import { Button, Input, Select, DatePicker } from "doom-ui";
 
 const CreateEmployee: FC = () => {
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
