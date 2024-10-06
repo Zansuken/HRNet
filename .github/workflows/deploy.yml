@@ -6,26 +6,26 @@ on:
       - main
 
 jobs:
-build:
-  name: Build
-  runs-on: ubuntu-latest
+  build:
+    name: Build
+    runs-on: ubuntu-latest
 
-  steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-    - name: Setup Node
-      uses: actions/setup-node@v3
-      with:
-        node-version: '22'
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
 
-    - name: Install dependencies
-      uses: bahmutov/npm-install@v1
-      with:
-        node-version: '22'
-        legacy-peer-deps: true
-        force: true
-        
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+        with:
+          node-version: '22'
+          legacy-peer-deps: true
+          force: true
+
       - name: Build project
         run: npm run build
 
