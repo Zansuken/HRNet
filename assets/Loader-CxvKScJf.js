@@ -1,0 +1,1 @@
+import{j as s}from"./index-Bvd_kudM.js";const a=()=>s.jsxs("div",{className:"loader",children:[s.jsx("div",{className:"spinner"}),s.jsx("div",{className:"text",children:"Loading..."})]});export{a as default};
