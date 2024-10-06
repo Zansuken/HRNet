@@ -20,9 +20,8 @@ jobs:
           node-version: '22'
 
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
-        env:
-          CI: false
+        run: |
+          npm ci --legacy-peer-deps
 
       - name: Build project
         run: npm run build
