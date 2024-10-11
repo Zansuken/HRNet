@@ -58,7 +58,7 @@ const Employees: FC = () => {
   return (
     <>
       <Header />
-      <main className="container flex flex-col mx-auto my-8 h-[calc(100vh-92px)]">
+      <main className="container flex flex-col px-4 my-8 h-[calc(100vh-92px)]">
         <Table
           columns={columns}
           rows={rows}

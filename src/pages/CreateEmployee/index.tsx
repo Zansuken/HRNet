@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { useForm } from "react-hook-form";
+import { RegisterOptions, useForm, UseFormRegister } from "react-hook-form";
 import classNames from "classnames";
 import Header from "../../components/Header";
 import ConfirmationDialog from "./ConfirmationDialog";
@@ -8,6 +8,19 @@ import { useAppDispatch } from "../../redux/hooks";
 import { addEmployee } from "../../redux/app/appSlice";
 import { useNavigate } from "react-router-dom";
 import { Button, Input, Select, DatePicker } from "doom-ui";
+import { departmentsOptions, statesOptions } from "./constants";
+import { IS_DEV } from "../../constants";
+
+const registerExt = (
+  register: UseFormRegister<any>,
+  fieldName: string,
+  options: RegisterOptions
+) => ({ ...register(fieldName, options), required: !!options.required });
+
+const getRequiredMessage = () => "required";
+const getMaxLengthMessage = (maxLength: number) =>
+  `maximum ${maxLength} characters`;
+const getZipCodePatternMessage = () => "should be 5 digits";
 
 const CreateEmployee: FC = () => {
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
@@ -53,17 +66,81 @@ const CreateEmployee: FC = () => {
   };
 
   const isSubmitDisabled = Object.keys(formState.errors).length > 0;
+  const fieldSetHasError = Boolean(
+    formState.errors["street"] ||
+      formState.errors["city"] ||
+      formState.errors["state"] ||
+      formState.errors["zipCode"]
+  );
+
+  const registerFirstName = registerExt(register, "firstName", {
+    required: { value: true, message: getRequiredMessage() },
+    maxLength: {
+      value: 20,
+      message: getMaxLengthMessage(20),
+    },
+  });
+
+  const registerLastName = registerExt(register, "lastName", {
+    required: { value: true, message: getRequiredMessage() },
+    maxLength: {
+      value: 20,
+      message: getMaxLengthMessage(20),
+    },
+  });
+
+  const registerDob = registerExt(register, "dob", {
+    required: { value: true, message: getRequiredMessage() },
+  });
+
+  const registerStartDate = registerExt(register, "startDate", {
+    required: { value: true, message: getRequiredMessage() },
+  });
+
+  const registerStreet = registerExt(register, "street", {
+    required: { value: true, message: getRequiredMessage() },
+    maxLength: {
+      value: 50,
+      message: getMaxLengthMessage(50),
+    },
+  });
+
+  const registerCity = registerExt(register, "city", {
+    required: { value: true, message: getRequiredMessage() },
+    maxLength: {
+      value: 50,
+      message: getMaxLengthMessage(50),
+    },
+  });
+
+  const registerState = registerExt(register, "state", {
+    required: { value: true, message: getRequiredMessage() },
+  });
+
+  const registerZipCode = registerExt(register, "zipCode", {
+    required: { value: true, message: getRequiredMessage() },
+    pattern: {
+      value: /^[0-9]{5}$/,
+      message: getZipCodePatternMessage(),
+    },
+  });
+
+  const registerDepartment = registerExt(register, "department", {
+    required: { value: true, message: getRequiredMessage() },
+  });
 
   return (
     <>
       <Header />
       <main className="flex flex-col items-center w-full max-w-md px-4 pt-6 space-y-6 h-full">
         <h2 className="text-2xl font-semibold">Create Employee</h2>
-        <div className="absolute top-2 right-8">
-          <Button onClick={fillMockedData} type="button">
-            Fill Mocked Data
-          </Button>
-        </div>
+        {IS_DEV && (
+          <div className="absolute top-2 right-8">
+            <Button onClick={fillMockedData} type="button">
+              Fill Mocked Data
+            </Button>
+          </div>
+        )}
         <form
           className="w-full flex flex-col gap-4 !mt-4"
           onSubmit={handleSubmit(handleOnSubmit)}
@@ -72,70 +149,36 @@ const CreateEmployee: FC = () => {
             id="first-name"
             label="First Name"
             type="text"
-            inputProps={{
-              ...register("firstName", {
-                required: { value: true, message: "First Name is required" },
-                maxLength: {
-                  value: 20,
-                  message: "First Name should not exceed 20 characters",
-                },
-              }),
-            }}
+            inputProps={registerFirstName}
             error={formState.errors["firstName"]?.message}
           />
           <Input
             id="last-name"
             label="Last Name"
             type="text"
-            inputProps={{
-              ...register("lastName", {
-                required: { value: true, message: "Last Name is required" },
-                maxLength: {
-                  value: 20,
-                  message: "Last Name should not exceed 20 characters",
-                },
-              }),
-            }}
+            inputProps={registerLastName}
             error={formState.errors["lastName"]?.message}
           />
           <DatePicker
             id="dob"
             label="Date of Birth"
-            inputProps={{
-              ...register("dob", {
-                required: { value: true, message: "Date of Birth is required" },
-              }),
-            }}
+            inputProps={registerDob}
             error={formState.errors["dob"]?.message}
           />
           <DatePicker
             id="start-date"
             label="Start Date"
-            inputProps={{
-              ...register("startDate", {
-                required: { value: true, message: "Start Date is required" },
-              }),
-            }}
+            inputProps={registerStartDate}
             error={formState.errors["startDate"]?.message}
           />
           <fieldset
             className={classNames("p-4 border rounded-md flex flex-col gap-2", {
-              "border-red-500": Boolean(
-                formState.errors["street"] ||
-                  formState.errors["city"] ||
-                  formState.errors["state"] ||
-                  formState.errors["zipCode"]
-              ),
+              "border-red-500": fieldSetHasError,
             })}
           >
             <legend
               className={classNames("px-2 text-sm font-medium", {
-                "text-red-500": Boolean(
-                  formState.errors["street"] ||
-                    formState.errors["city"] ||
-                    formState.errors["state"] ||
-                    formState.errors["zipCode"]
-                ),
+                "text-red-500": fieldSetHasError,
               })}
             >
               Address
@@ -144,76 +187,21 @@ const CreateEmployee: FC = () => {
               id="street"
               label="Street"
               type="text"
-              inputProps={{
-                ...register("street", {
-                  required: { value: true, message: "Street is required" },
-                  maxLength: {
-                    value: 50,
-                    message: "Street should not exceed 50 characters",
-                  },
-                }),
-              }}
+              inputProps={registerStreet}
               error={formState.errors["street"]?.message}
             />
             <Input
               id="city"
               label="City"
               type="text"
-              inputProps={{
-                ...register("city", {
-                  required: { value: true, message: "City is required" },
-                  maxLength: {
-                    value: 50,
-                    message: "City should not exceed 24 characters",
-                  },
-                }),
-              }}
+              inputProps={registerCity}
               error={formState.errors["city"]?.message}
             />
             <Select
               id="state"
               label="State"
-              options={[
-                { value: "alabama", label: "Alabama" },
-                { value: "alaska", label: "Alaska" },
-                { value: "arizona", label: "Arizona" },
-                { value: "arkansas", label: "Arkansas" },
-                { value: "california", label: "California" },
-                { value: "colorado", label: "Colorado" },
-                { value: "connecticut", label: "Connecticut" },
-                { value: "delaware", label: "Delaware" },
-                { value: "florida", label: "Florida" },
-                { value: "georgia", label: "Georgia" },
-                { value: "hawaii", label: "Hawaii" },
-                { value: "idaho", label: "Idaho" },
-                { value: "illinois", label: "Illinois" },
-                { value: "indiana", label: "Indiana" },
-                { value: "iowa", label: "Iowa" },
-                { value: "kansas", label: "Kansas" },
-                { value: "kentucky", label: "Kentucky" },
-                { value: "louisiana", label: "Louisiana" },
-                { value: "maine", label: "Maine" },
-                { value: "maryland", label: "Maryland" },
-                { value: "massachusetts", label: "Massachusetts" },
-                { value: "michigan", label: "Michigan" },
-                { value: "minnesota", label: "Minnesota" },
-                { value: "mississippi", label: "Mississippi" },
-                { value: "missouri", label: "Missouri" },
-                { value: "montana", label: "Montana" },
-                { value: "nebraska", label: "Nebraska" },
-                { value: "nevada", label: "Nevada" },
-                { value: "new-hampshire", label: "New Hampshire" },
-                { value: "new-jersey", label: "New Jersey" },
-                { value: "new-mexico", label: "New Mexico" },
-                { value: "new-york", label: "New York" },
-                { value: "north-carolina", label: "North Carolina" },
-                { value: "north-dakota", label: "North Dakota" },
-              ]}
-              inputProps={{
-                ...register("state", {
-                  required: { value: true, message: "State is required" },
-                }),
-              }}
+              options={statesOptions}
+              inputProps={registerState}
               error={formState.errors["state"]?.message}
               emptyOption="Select a state"
             />
@@ -221,33 +209,15 @@ const CreateEmployee: FC = () => {
               id="zip-code"
               label="Zip Code"
               type="text"
-              inputProps={{
-                ...register("zipCode", {
-                  required: { value: true, message: "Zip Code is required" },
-                  pattern: {
-                    value: /^[0-9]{5}$/,
-                    message: "Zip Code should be 5 digits",
-                  },
-                }),
-              }}
+              inputProps={registerZipCode}
               error={formState.errors["zipCode"]?.message}
             />
           </fieldset>
           <Select
             id="department"
             label="Department"
-            options={[
-              { value: "sales", label: "Sales" },
-              { value: "marketing", label: "Marketing" },
-              { value: "engineering", label: "Engineering" },
-              { value: "hr", label: "HR" },
-              { value: "finance", label: "Finance" },
-            ]}
-            inputProps={{
-              ...register("department", {
-                required: { value: true, message: "Department is required" },
-              }),
-            }}
+            options={departmentsOptions}
+            inputProps={registerDepartment}
             error={formState.errors["department"]?.message}
             emptyOption="Select a department"
           />
