@@ -6,11 +6,11 @@ This project is compiled with Vite using TypeScript and React.
 
 1. Clone the repository:
   ```sh
-  git clone https://github.com/yourusername/your-repo-name.git
+  git clone https://github.com/Zansuken/HRNet.git
   ```
 2. Navigate to the project directory:
   ```sh
-  cd your-repo-name
+  cd HRNet
   ```
 3. Install dependencies:
   ```sh
