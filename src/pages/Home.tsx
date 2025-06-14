@@ -10,7 +10,9 @@ const Home: FC = () => {
       <h1 className="text-3xl font-bold">HRnet</h1>
       <div className="flex w-full">
         <div className="w-1/2 flex justify-end pr-2">
-          <Button onClick={() => navigate("/employees")}>See Employees</Button>
+          <Button onClick={() => navigate("/employees")}>
+            See great Employees
+          </Button>
         </div>
         <div className="w-1/2 flex justify-start pl-2">
           <Button type="button" onClick={() => navigate("/create-employee")}>

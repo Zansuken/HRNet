@@ -65,7 +65,7 @@ const Employees: FC = () => {
           enablePagination
           enableSearch
           isLoading={isFetchingEmployees}
-          title="Current Employees"
+          title="Current great Employees"
         />
       </main>
     </>
